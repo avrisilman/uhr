@@ -14,6 +14,17 @@ public class Role {
     @Column(name = "roleName")
     public String roleName;
 
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "role_menu",
+            joinColumns = { @JoinColumn(name = "roleId") },
+            inverseJoinColumns = { @JoinColumn(name = "menuId") })
+    public Set<Menu> menus = new HashSet<>();
+
     public long getId() {
         return id;
     }

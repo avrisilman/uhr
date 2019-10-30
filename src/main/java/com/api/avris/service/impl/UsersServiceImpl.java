@@ -51,6 +51,7 @@ public class UsersServiceImpl implements UsersService {
         newUser.setHandphone(user.getHandphone());
         newUser.setEmail(user.getEmail());
         newUser.setAddress(user.getAddress());
+        newUser.setRole(user.getRole());
         newUser.setToken(token);
 
         return usersRepository.save(newUser);
