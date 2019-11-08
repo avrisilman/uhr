@@ -4,11 +4,13 @@ import com.api.avris.jpa.Users;
 import com.api.avris.repositories.UsersRepository;
 import com.api.avris.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service("usersService")
@@ -17,10 +19,25 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     UsersRepository usersRepository;
 
+    @Autowired
+    JavaMailSender emails;
+
 
     @Override
-    public Users login(String username) {
-        Optional<Users> users = usersRepository.login(username);
+    public Users login(String email) {
+        String code = getRandomNumberString();
+        Optional<Users> users = usersRepository.login(email);
+        String token = UUID.randomUUID().toString();
+        Users custom= users.get();
+        custom.setToken(token);
+        custom.setCode(code);
+        sendEmail(email, code);
+        return  usersRepository.save(custom);
+    }
+
+    @Override
+    public Users postCode(String code) {
+        Optional<Users> users = usersRepository.postCode(code);
         String token = UUID.randomUUID().toString();
         Users custom= users.get();
         custom.setToken(token);
@@ -55,6 +72,21 @@ public class UsersServiceImpl implements UsersService {
         newUser.setToken(token);
 
         return usersRepository.save(newUser);
+    }
+
+
+    public static String getRandomNumberString() {
+        Random rnd = new Random();
+        int number = rnd.nextInt(9999);
+        return String.format("%04d", number);
+    }
+
+    void sendEmail(String email, String code) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(email);
+        msg.setSubject("KODE VERIFIKASI URBAN HEIGHT APPS");
+        msg.setText(code);
+        emails.send(msg);
     }
 
 }

@@ -35,6 +35,9 @@ public class Users {
     @Column(name="address")
     private String address;
 
+    @Column(name="code")
+    private String code;
+
     @Column(name="token")
     private String token;
 
@@ -100,6 +103,14 @@ public class Users {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getToken() {

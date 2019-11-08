@@ -31,6 +31,12 @@ public class ChildMenu {
     @Column(name="status")
     public String status;
 
+    @Column(name="date")
+    public String date;
+
+    @Column(name="time")
+    public String time;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "subId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -109,6 +115,22 @@ public class ChildMenu {
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
 
