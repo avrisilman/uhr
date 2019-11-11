@@ -8,15 +8,8 @@ import com.api.avris.repositories.UsersRepository;
 import com.api.avris.util.DateTimes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 @RestController
 public class SubChildMenuController {
@@ -48,6 +41,9 @@ public class SubChildMenuController {
         return new ApiResponse<>(HttpStatus.OK.value(), "success", childRepository.save(ch));
     }
 
-
+    @GetMapping(value = "/api/subchildmenu/{usersId}/sub/{subId}")
+    public ApiResponse<ChildMenu> getChild(@PathVariable long usersId, @PathVariable long subId){
+        return new ApiResponse<>(HttpStatus.OK.value(), "success", childRepository.findChildMenuById(usersId, subId));
+    }
 
 }

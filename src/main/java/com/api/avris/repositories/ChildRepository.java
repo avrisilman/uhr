@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface ChildRepository extends CrudRepository<ChildMenu, Long> {
 
-    @Query(value = "SELECT cm.* FROM users us INNER JOIN role r ON us.role_id=r.role_id INNER JOIN role_menu rm ON rm.role_id=r.role_id INNER JOIN menus m ON m.menu_id=rm.menu_id INNER JOIN sub_menu sm ON sm.menu_id=m.menu_id INNER JOIN child_menu cm ON cm.sub_id = sm.sub_id WHERE us.users_id=4 AND sm.sub_id=:sub_id", nativeQuery = true)
-    List<ChildMenu> findChildMenuById(@Param("sub_id") long sub_id);
+    @Query(value = "SELECT cm.* FROM child_menu cm WHERE cm.users_id=:users_id AND cm.sub_id=:sub_id", nativeQuery = true)
+    List<ChildMenu> findChildMenuById(@Param("users_id") long users_id, @Param("sub_id") long sub_id);
 
 }
 
