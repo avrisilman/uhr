@@ -1,6 +1,7 @@
 package com.api.avris.controller;
 
 import com.api.avris.jpa.ApiResponse;
+import com.api.avris.jpa.ChildMenu;
 import com.api.avris.jpa.Market;
 import com.api.avris.repositories.MarketRepository;
 import com.api.avris.repositories.SubMenuRepository;
@@ -8,10 +9,8 @@ import com.api.avris.repositories.UsersRepository;
 import com.api.avris.util.DateTimes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 @RestController
@@ -43,6 +42,11 @@ public class MarketController {
         m.setSubMenu(subMenuRepository.findById(subId).get());
 
         return new ApiResponse<>(HttpStatus.OK.value(), "success", marketRepository.save(m));
+    }
+
+    @GetMapping(value = "/api/market/{usersId}/sub/{subId}")
+    public ApiResponse<Market> getMarket(@PathVariable long usersId, @PathVariable long subId){
+        return new ApiResponse<>(HttpStatus.OK.value(), "success", marketRepository.findMarketById(usersId, subId));
     }
 
 }

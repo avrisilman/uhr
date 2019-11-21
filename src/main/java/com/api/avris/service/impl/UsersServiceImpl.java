@@ -59,7 +59,6 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Users save(Users user) {
-
         String token = UUID.randomUUID().toString();
         Users newUser = new Users();
         newUser.setFullName(user.getFullName());
