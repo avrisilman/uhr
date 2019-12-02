@@ -28,14 +28,6 @@ public class Event {
     @Column(name="status")
     public String status;
 
-   /* @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "subId", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
-    @JsonProperty("subId")
-    private SubMenu subMenu;*/
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usersId")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -83,14 +75,6 @@ public class Event {
     public void setStatus(String status) {
         this.status = status;
     }
-
-   /* public SubMenu getSubMenu() {
-        return subMenu;
-    }
-
-    public void setSubMenu(SubMenu subMenu) {
-        this.subMenu = subMenu;
-    }*/
 
     public Users getUsers() {
         return users;
