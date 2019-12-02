@@ -9,12 +9,15 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 @Entity
-public class Event {
+public class Numpang {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "eventId")
+    @Column(name = "id")
     public long id;
+
+    @Column(name="goingto")
+    public String goingto;
 
     @Column(name="clock")
     public String clock;
@@ -25,17 +28,6 @@ public class Event {
     @Column(name="information")
     public String information;
 
-    @Column(name="status")
-    public String status;
-
-   /* @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "subId", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
-    @JsonProperty("subId")
-    private SubMenu subMenu;*/
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usersId")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -44,12 +36,23 @@ public class Event {
     @JsonProperty("usersId")
     private Users users;
 
+    @Column(name="idNumpang")
+    public long idNumpang;
+
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getGoingto() {
+        return goingto;
+    }
+
+    public void setGoingto(String goingto) {
+        this.goingto = goingto;
     }
 
     public String getClock() {
@@ -76,27 +79,19 @@ public class Event {
         this.information = information;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-   /* public SubMenu getSubMenu() {
-        return subMenu;
-    }
-
-    public void setSubMenu(SubMenu subMenu) {
-        this.subMenu = subMenu;
-    }*/
-
     public Users getUsers() {
         return users;
     }
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public long getIdNumpang() {
+        return idNumpang;
+    }
+
+    public void setIdNumpang(long idNumpang) {
+        this.idNumpang = idNumpang;
     }
 }
