@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,6 +22,9 @@ public interface UsersRepository extends CrudRepository<Users, Long> {
     Optional<Users> findByCode(@Param("code") long code);
 
     Optional<Users> findByToken(String token);
+
+    @Query(value = "SELECT u.* FROM users u WHERE u.users_id=:users_id", nativeQuery = true)
+    Optional<Users> findNumpangById(@Param("users_id") long users_id);
 
 }
 

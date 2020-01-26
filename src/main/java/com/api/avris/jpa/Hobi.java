@@ -9,30 +9,21 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 @Entity
-public class PinjamAlat {
+public class Hobi {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sewaId")
+    @Column(name = "hobiId")
     public long id;
 
     @Column(name = "title")
     public String title;
 
-    @Column(name = "lamaPinjam")
-    public String lamaPinjam;
-
     @Column(name = "imgUrl")
     public String imgUrl;
 
-    @Column(name = "price")
-    public String price;
-
     @Column(name = "information")
     public String information;
-
-    @Column(name = "status")
-    public String status;
 
     @Column(name = "date")
     public String date;
@@ -40,22 +31,19 @@ public class PinjamAlat {
     @Column(name = "time")
     public String time;
 
-    @Column(name = "handphone")
-    public String handphone;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "subId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JsonProperty("subId")
     private SubMenu subMenu;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usersId")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JsonProperty("usersId")
     private Users users;
 
@@ -75,14 +63,6 @@ public class PinjamAlat {
         this.title = title;
     }
 
-    public String getLamaPinjam() {
-        return lamaPinjam;
-    }
-
-    public void setLamaPinjam(String lamaPinjam) {
-        this.lamaPinjam = lamaPinjam;
-    }
-
     public String getImgUrl() {
         return imgUrl;
     }
@@ -91,28 +71,12 @@ public class PinjamAlat {
         this.imgUrl = imgUrl;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
     public String getInformation() {
         return information;
     }
 
     public void setInformation(String information) {
         this.information = information;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getDate() {
@@ -129,14 +93,6 @@ public class PinjamAlat {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public String getHandphone() {
-        return handphone;
-    }
-
-    public void setHandphone(String handphone) {
-        this.handphone = handphone;
     }
 
     public SubMenu getSubMenu() {

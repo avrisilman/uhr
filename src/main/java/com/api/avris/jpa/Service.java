@@ -6,30 +6,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
-public class Numpang {
-
+public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "serviceId")
     public long id;
-
-    @Column(name="goingto")
-    public String goingto;
-
-    @Column(name="clock")
-    public String clock;
-
-    @Column(name="date")
-    public String date;
-
-    @Column(name="harga")
-    public String harga;
 
     @Column(name="information")
     public String information;
+
+    @Column(name="images")
+    public String images;
+
+    @Column(name="status")
+    public String status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usersId")
@@ -47,36 +41,20 @@ public class Numpang {
         this.id = id;
     }
 
-    public String getGoingto() {
-        return goingto;
-    }
-
-    public void setGoingto(String goingto) {
-        this.goingto = goingto;
-    }
-
-    public String getClock() {
-        return clock;
-    }
-
-    public void setClock(String clock) {
-        this.clock = clock;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getInformation() {
         return information;
     }
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Users getUsers() {
@@ -87,11 +65,11 @@ public class Numpang {
         this.users = users;
     }
 
-    public String getHarga() {
-        return harga;
+    public String getImages() {
+        return images;
     }
 
-    public void setHarga(String harga) {
-        this.harga = harga;
+    public void setImages(String images) {
+        this.images = images;
     }
 }

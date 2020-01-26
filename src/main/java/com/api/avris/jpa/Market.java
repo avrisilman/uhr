@@ -40,6 +40,9 @@ public class Market {
     @Column(name = "time")
     public String time;
 
+    @Column(name = "handphone")
+    public String handphone;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "subId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -142,5 +145,13 @@ public class Market {
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public String getHandphone() {
+        return handphone;
+    }
+
+    public void setHandphone(String handphone) {
+        this.handphone = handphone;
     }
 }

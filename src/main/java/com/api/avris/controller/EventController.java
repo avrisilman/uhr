@@ -22,15 +22,16 @@ public class EventController {
     @Autowired
     UsersRepository usersRepository;
 
+
     @PostMapping("/api/event/{usersId}")
-    public ApiResponse<Object> postChildMenu(@PathVariable(value = "usersId") Long usersId,
-                                             @Valid @RequestBody Event e) {
-        Event event = new Event();
-        event.setClock(e.getClock());
-        event.setDate(e.getDate());
-        event.setInformation(e.getInformation());
-        event.setUsers(usersRepository.findById(usersId).get());
-        return new ApiResponse<>(HttpStatus.OK.value(), "success", eventRepository.save(event));
+    public ApiResponse<Event> postEvent(@PathVariable(value = "usersId") Long usersId,@RequestParam("clock") final String clock, @RequestParam("date") final String date, @RequestParam("information") final String information){
+        Event e = new Event();
+        e.setClock(clock);
+        e.setDate(date);
+        e.setInformation(information);
+        e.setStatus("BELUM DI SETUJUI");
+        e.setUsers(usersRepository.findById(usersId).get());
+        return new ApiResponse<>(HttpStatus.OK.value(), "success", eventRepository.save(e));
     }
 
     @GetMapping(value = "/api/event/{usersId}")
